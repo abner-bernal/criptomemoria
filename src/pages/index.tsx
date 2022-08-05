@@ -6,15 +6,14 @@ import { COLLECTION_EASY_CLASSIC } from "../configs/database";
 import { dayNumber } from "../utils/date-utils";
 import { words } from '../data/easyClassicMode';
 
-import { Container, Main } from "./_styles";
+import { Container, Main } from "../global/styles/pages";
 
 import { LetterProps } from "../components/Letter";
 import GameHeader from "../components/GameHeader";
 import { Header } from "../components/Header";
 import GameWord from "../components/GameWord";
-import Grid from "../components/Grid";
-import { completeSortCards, sortArray } from "../utils/card-utils";
 import { CardProps } from "../components/Card";
+import Grid from "../components/Grid";
 
 type HomeProps = {
   initialData: GameDataProps;

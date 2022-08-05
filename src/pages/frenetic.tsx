@@ -1,21 +1,22 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { GetServerSideProps, NextPage } from "next";
 
-import { GameDataProps, initialGameData } from "../../utils/data-utils";
-import { completeSortCards, sortArray } from "../../utils/card-utils";
-import { COLLECTION_EASY_FRENETIC } from "../../configs/database";
-import { words } from "../../data/easyFreneticMode";
-import { dayNumber } from "../../utils/date-utils";
+import { GameDataProps, initialGameData } from "../utils/data-utils";
+import { completeSortCards, sortArray } from "../utils/card-utils";
+import { COLLECTION_EASY_FRENETIC } from "../configs/database";
+import { words } from "../data/easyFreneticMode";
+import { dayNumber } from "../utils/date-utils";
 
-import { TextTimer, ButtonStart } from "./_styles";
+import { TextTimer, ButtonStart } from "../global/styles/freneticPage";
 
-import { LetterProps } from "../../components/Letter";
-import GameHeader from "../../components/GameHeader";
-import { CardProps } from "../../components/Card";
-import { Header } from "../../components/Header";
-import GameWord from "../../components/GameWord";
-import Grid from "../../components/Grid";
-import { Container, Main } from "../_styles";
+import { LetterProps } from "../components/Letter";
+import GameHeader from "../components/GameHeader";
+import { CardProps } from "../components/Card";
+import { Header } from "../components/Header";
+import GameWord from "../components/GameWord";
+import Grid from "../components/Grid";
+
+import { Container, Main } from "../global/styles/pages";
 
 type FreneticModeProps = {
   initialData: GameDataProps;
