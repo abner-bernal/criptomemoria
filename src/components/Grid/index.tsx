@@ -29,7 +29,6 @@ function Grid({
   const { curRow, solutionCards, encryptedSolution } = gameData;
   
   useEffect(() => {
-    console.log(cards);
     setStateCards(cards);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cards]);
