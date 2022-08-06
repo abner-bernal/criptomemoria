@@ -25,7 +25,7 @@ type FreneticModeProps = {
 const FreneticMode: NextPage<FreneticModeProps> = ({ initialData }: FreneticModeProps) => {
   const [gameData, setGameData] = useState<GameDataProps>(initialData);
   const [tries, setTries] = useState<LetterProps[][]>(initialData.tries);
-  const [cards, setCards] = useState<CardProps[]>(initialData.cards);
+  const [cards, setCards] = useState<CardProps[] | undefined>(initialData.cards);
   const [start, setStart] = useState<boolean>(false);
 
   const letterPosition = useRef<number>(0);
@@ -89,7 +89,7 @@ const FreneticMode: NextPage<FreneticModeProps> = ({ initialData }: FreneticMode
 
 type TimerProps = {
   start: boolean;
-  cards: CardProps[];
+  cards?: CardProps[];
   setCards: (cards: CardProps[]) => void;
 }
 
@@ -102,13 +102,15 @@ const Timer = ({cards, setCards, start}: TimerProps) => {
   }
 
   const handleRestartGame = useCallback(() => {
-    const newStateCards = cards.map((card) => {
-      card.flipped = false;
-      return card;
-    });    
-    const newCards = sortArray(newStateCards);
+    if(cards) {
+      const newStateCards = cards.map((card) => {
+        card.flipped = false;
+        return card;
+      });    
+      const newCards = sortArray(newStateCards);
 
-    setCards([...newCards]);
+      setCards([...newCards]);
+    }
   }, [cards, setCards])
 
   useEffect(() => {

@@ -10,13 +10,13 @@ import { CardProps } from "../Card";
 
 interface GameWordProps {
   COLLECTION: string;
-  gameData: GameDataProps;
+  gameData: GameDataProps | undefined;
   tries: LetterProps[][];
   onGameOver: (hasWin: boolean) => void;
   letterPosition: MutableRefObject<number>;
   setGameData: (data: GameDataProps) => void;
   setTries: (tries: LetterProps[][]) => void;
-  setCards: (cards: SetStateAction<CardProps[]>) => void;
+  setCards: (cards: SetStateAction<CardProps[] | undefined>) => void;
 }
 
 function GameWord({ 
@@ -31,47 +31,48 @@ function GameWord({
 }: GameWordProps) {
 
   const checkHits = useCallback(() => {
-    let hasWon = true;
-    
-    const newRowState = gameData.solutionCards.map((card, index): LetterProps => {
-      const correct = tries[gameData.curRow][index].char === card.letter;
+    if(gameData) {
+      let hasWon = true;
+      
+      const newRowState = gameData.solutionCards.map((card, index): LetterProps => {
+        const correct = tries[gameData.curRow][index].char === card.letter;
 
-      if(!correct) {
-        hasWon = false;
+        if(!correct) {
+          hasWon = false;
+        }
+
+        return {
+          char: tries[gameData.curRow][index].char,
+          status: correct ? 'correct' : 'incorrect'
+        };
+      });
+
+      tries[gameData.curRow] = hasWon ? gameData?.solution : newRowState;
+      
+      gameData.curDay = dayNumber();
+      gameData.won = hasWon;
+      gameData.gameOver = gameData.curRow === 3 || hasWon;
+      
+      if(hasWon) {
+        onGameOver(true);
+      } else if(gameData.curRow === 3) {
+        onGameOver(false); //parâmetro se ganhou ou não
+      } else {
+        gameData.curRow++;
+        tries[gameData.curRow] = gameData.encryptedSolution;
       }
+      
+      gameData.tries = tries;
+      gameData.cards = gameData.cards.map((item: CardProps) => {
+        item.flipped = false;
+        return item;
+      });
 
-      return {
-        char: tries[gameData.curRow][index].char,
-        status: correct ? 'correct' : 'incorrect'
-      };
-    });
-
-    tries[gameData.curRow] = hasWon ? gameData.solution : newRowState;
-    
-    gameData.curDay = dayNumber();
-    gameData.won = hasWon;
-    gameData.gameOver = gameData.curRow === 3 || hasWon;
-    
-    if(hasWon) {
-      onGameOver(true);
-    } else if(gameData.curRow === 3) {
-      onGameOver(false); //parâmetro se ganhou ou não
-    } else {
-      gameData.curRow++;
-      tries[gameData.curRow] = gameData.encryptedSolution;
+      localStorage.setItem(COLLECTION, JSON.stringify(gameData));
+      setTries([...tries]);
+      setCards([...gameData.cards])
+      setGameData({...gameData});
     }
-    
-    gameData.tries = tries;
-    gameData.cards = gameData.cards.map((item: CardProps) => {
-      item.flipped = false;
-      return item;
-    });
-
-    localStorage.setItem(COLLECTION, JSON.stringify(gameData));
-    setTries([...tries]);
-    setCards([...gameData.cards])
-    setGameData({...gameData});
-
   }, [
     tries,
     setTries,
@@ -83,7 +84,7 @@ function GameWord({
   ]);
 
   useEffect(() => {
-    if (letterPosition.current === gameData.solution.length ) {  
+    if (gameData && (letterPosition.current === gameData.solution.length)) {  
       letterPosition.current = 0;
       checkHits();      
     }

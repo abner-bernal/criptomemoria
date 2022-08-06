@@ -1,4 +1,4 @@
-import { memo, MutableRefObject, useCallback, useEffect, useState } from "react";
+import { memo, MutableRefObject, useCallback, useEffect, useMemo, useState } from "react";
 import { GameDataProps } from "../../utils/data-utils";
 
 import { Card, CardProps } from "../Card";
@@ -9,8 +9,8 @@ import { Container, SkeletonCard } from "./styled";
 
 export interface GridProps {
   active?: boolean;
-  cards: CardProps[];
-  gameData: GameDataProps;
+  cards?: CardProps[];
+  gameData: GameDataProps | undefined;
   tries: LetterProps[][];
   letterPosition: MutableRefObject<number>;
   setTries: (tries: LetterProps[][]) => void;
@@ -25,11 +25,17 @@ function Grid({
   letterPosition,
 }: GridProps) {
   const [stateCards, setStateCards] = useState(cards);
+  const curRow = gameData ? gameData.curRow : 0;
+  const solutionCards = useMemo(() => (
+    gameData ? gameData.solutionCards : [] as CardProps[]
+  ), [gameData]);
+  const encryptedSolution = useMemo(() => (
+    gameData ? gameData.encryptedSolution : [] as LetterProps[]
+  ), [gameData]);
 
-  const { curRow, solutionCards, encryptedSolution } = gameData;
   
   useEffect(() => {
-    setStateCards(cards);
+    cards && setStateCards(cards);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cards]);
 
@@ -57,7 +63,7 @@ function Grid({
   ), [solutionCards, letterPosition, tries, curRow]);
 
   const handleCardClick = useCallback((id: string) => {
-    const newStateCards = stateCards.map((card) => {
+    const newStateCards = stateCards?.map((card) => {
       // Se o id do cartão nao for o id clicado, ou já estiver virado, desvira.
       if (card.id !== id || card.flipped) {
         card.flipped = false;
@@ -105,19 +111,28 @@ function Grid({
     encryptedSolution, 
   ]);
 
+  const skeletonCards = () => {
+    let rows = [];
+    for (var i = 0; i < 20; i++) {
+      rows.push(
+        <SkeletonCard key={i}>
+          <Star />
+        </SkeletonCard>
+      );
+    }
+
+    return rows;
+  }
+
   return(
     <Container>
       {
-        stateCards.map(card => (
-          active ?
+        (stateCards && gameData && active) ? 
+          stateCards.map(card => (
             <Card {...card} key={card.id} handleClick={handleCardClick}/>
-          :
-          (
-            <SkeletonCard key={card.id}>
-              <Star />
-            </SkeletonCard>
-          )
-        ))
+          ))
+        :
+          skeletonCards()
       }      
     </Container>
   );

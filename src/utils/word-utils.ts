@@ -42,13 +42,16 @@ export const encryptWord = (wordCards: CardProps[]): LetterProps[] => {
   return encryptedWord;
 }
 
-export const emptyWord = (word: LetterProps[]): LetterProps[] => {
-  const wordResult = word.map((): LetterProps =>  {
-    return {
+export const emptyWord = (size: number): LetterProps[] => {
+  let wordResult = [] as LetterProps[];
+
+  for (let i = 0; i < size; i++) {
+    wordResult.push({
       char: "",
       status: 'empty'
-    }
-  });
+    });
+    
+  }
 
   return wordResult;
 }; 

@@ -22,7 +22,7 @@ export const initialGameData = (word: string): GameDataProps => {
   const solutionCards = generateWordCards(wordNoAccents);
   const encryptedSolution = encryptWord(solutionCards);
   const cards = completeSortCards(solutionCards);
-  const empty = emptyWord(solution);
+  const empty = emptyWord(solution.length);
 
   const data = {
     curDay: dayNumber(),

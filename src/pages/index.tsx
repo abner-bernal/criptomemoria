@@ -14,30 +14,41 @@ import { Header } from "../components/Header";
 import GameWord from "../components/GameWord";
 import { CardProps } from "../components/Card";
 import Grid from "../components/Grid";
+import { emptyWord } from "../utils/word-utils";
 
-type HomeProps = {
-  initialData: GameDataProps;
-}
-
-const Home: NextPage<HomeProps> = ({initialData}: HomeProps) => {
-  const [gameData, setGameData] = useState<GameDataProps>(initialData);
-  const [tries, setTries] = useState<LetterProps[][]>(initialData.tries);
-  const [cards, setCards] = useState<CardProps[]>(initialData.cards);
+const Home: NextPage = () => {
+  const [gameData, setGameData] = useState<GameDataProps>();
+  const [tries, setTries] = useState<LetterProps[][]>(() => {
+    const empty = emptyWord(5);
+    return [empty, empty, empty, empty]
+  });
+  const [cards, setCards] = useState<CardProps[]>();
 
   const letterPosition = useRef<number>(0);
 
   useEffect(() => {
     const storedData = localStorage.getItem(COLLECTION_EASY_CLASSIC);
-
+    const curDay = dayNumber();
+    let newData = true;
     if(storedData) {
       const data: GameDataProps = JSON.parse(storedData);
-      if(data.curDay === gameData.curDay) {
+      
+      if(data.curDay === curDay) {
         setCards([...data.cards]);
         setTries([...data.tries]);
         setGameData({...data});
+        newData = false;
       }      
     }
-  }, [gameData.curDay])
+
+    if(newData) {
+      const initialData = initialGameData(words[curDay]);
+
+      setCards([...initialData.cards]);
+      setTries([...initialData.tries]);
+      setGameData({...initialData});
+    }    
+  }, [])
 
   const handleGameOver = useCallback((hasWin: boolean) => {
     //Fim de Jogo
@@ -63,23 +74,12 @@ const Home: NextPage<HomeProps> = ({initialData}: HomeProps) => {
           tries={tries}
           setTries={setTries}
           gameData={gameData}
-          active={!gameData.gameOver}
+          active={!gameData?.gameOver}
           letterPosition={letterPosition}
         />
       </Main>
     </Container>
   )
-}
-
-export const getServerSideProps: GetServerSideProps = async () => {
-  const curDay = dayNumber();
-  const initialData = initialGameData(words[curDay]);
-  
-  return {
-    props: {
-      initialData
-    }
-  }
 }
 
 export default Home;
