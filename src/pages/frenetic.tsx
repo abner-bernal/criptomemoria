@@ -135,9 +135,8 @@ const Timer = ({cards, setCards, start}: TimerProps) => {
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const curDay = dayNumber();
-  console.log(curDay);
   const initialData = initialGameData(words[curDay], curDay);
-  
+
   return {
     props: {
       initialData
