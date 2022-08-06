@@ -42,7 +42,7 @@ const Home: NextPage = () => {
     }
 
     if(newData) {
-      const initialData = initialGameData(words[curDay]);
+      const initialData = initialGameData(words[curDay], curDay);
 
       setCards([...initialData.cards]);
       setTries([...initialData.tries]);

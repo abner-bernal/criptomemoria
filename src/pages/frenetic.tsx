@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { GetServerSideProps, NextPage } from "next";
 
 import { GameDataProps, initialGameData } from "../utils/data-utils";
-import { completeSortCards, sortArray } from "../utils/card-utils";
+import { sortArray } from "../utils/card-utils";
 import { COLLECTION_EASY_FRENETIC } from "../configs/database";
 import { words } from "../data/easyFreneticMode";
 import { dayNumber } from "../utils/date-utils";
@@ -135,7 +135,8 @@ const Timer = ({cards, setCards, start}: TimerProps) => {
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const curDay = dayNumber();
-  const initialData = initialGameData(words[curDay]);
+  console.log(curDay);
+  const initialData = initialGameData(words[curDay], curDay);
   
   return {
     props: {

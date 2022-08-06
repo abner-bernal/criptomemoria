@@ -16,7 +16,7 @@ export type GameDataProps = {
   tries: LetterProps[][];
 }
 
-export const initialGameData = (word: string): GameDataProps => {
+export const initialGameData = (word: string, day: number): GameDataProps => {
   const wordNoAccents = word.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
   const solution = generateWordLetters(word);
   const solutionCards = generateWordCards(wordNoAccents);
@@ -25,7 +25,7 @@ export const initialGameData = (word: string): GameDataProps => {
   const empty = emptyWord(solution.length);
 
   const data = {
-    curDay: dayNumber(),
+    curDay: day,
     curRow: 0,
     solution,
     solutionCards,
