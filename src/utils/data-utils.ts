@@ -1,7 +1,6 @@
 import { emptyWord, encryptWord, generateWordCards, generateWordLetters } from "./word-utils";
 import { LetterProps } from "../components/Letter";
 import { CardProps } from "../components/Card";
-import { dayNumber } from "./date-utils";
 import { completeSortCards } from "./card-utils";
 
 export type GameDataProps = {
