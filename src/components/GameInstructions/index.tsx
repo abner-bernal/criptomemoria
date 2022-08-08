@@ -1,5 +1,6 @@
 import { useCallback, useContext, useState } from "react";
 import { ThemeContext } from "styled-components";
+import { PageName } from "../Header";
 import { 
   ButtonStart, 
   CardsContainer, 
@@ -18,11 +19,19 @@ import {
 } from "./styles";
 
 interface GameInstructionsProps {
-  initialPage?: 0 | 1;
+  initialPage: PageName;
 }
 
-function GameInstructions({initialPage = 0 }: GameInstructionsProps) {
-  const [currentPage, setCurrentPage] = useState<number>(initialPage);
+function GameInstructions({ initialPage }: GameInstructionsProps) {
+  const [currentPage, setCurrentPage] = useState<number>(() => {
+    switch (initialPage) {
+      case 'classic':
+        return 0; 
+      case 'frenetic':
+        return 1;
+      default: return 0;
+    }
+  });
   const { colors } = useContext(ThemeContext);
 
   const classicMode = useCallback(() => {

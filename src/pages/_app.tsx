@@ -7,10 +7,6 @@ import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import LoadScreen from '../components/LoadScreen';
 
-type String = {
-  shallow: string;
-}
-
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);

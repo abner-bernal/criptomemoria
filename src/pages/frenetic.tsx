@@ -17,32 +17,45 @@ import GameWord from "../components/GameWord";
 import Grid from "../components/Grid";
 
 import { Container, Main } from "../global/styles/pages";
+import { emptyWord } from "../utils/word-utils";
+import Head from "next/head";
 
-type FreneticModeProps = {
-  initialData: GameDataProps;
-}
-
-const FreneticMode: NextPage<FreneticModeProps> = ({ initialData }: FreneticModeProps) => {
-  const [gameData, setGameData] = useState<GameDataProps>(initialData);
-  const [tries, setTries] = useState<LetterProps[][]>(initialData.tries);
-  const [cards, setCards] = useState<CardProps[] | undefined>(initialData.cards);
+const FreneticMode: NextPage = () => {
+  const [gameData, setGameData] = useState<GameDataProps>();
+  const [tries, setTries] = useState<LetterProps[][]>(() => {
+    const empty = emptyWord(5);
+    return [empty, empty, empty, empty]
+  });
+  const [cards, setCards] = useState<CardProps[]>();
   const [start, setStart] = useState<boolean>(false);
 
   const letterPosition = useRef<number>(0);
 
   useEffect(() => {
     const storedData = localStorage.getItem(COLLECTION_EASY_FRENETIC);
-    
+    const curDay = dayNumber();
+    let newData = true;
+
     if(storedData) {
       const data: GameDataProps = JSON.parse(storedData);
-      if(data.curDay === gameData.curDay) {
+
+      if(data.curDay === curDay) {
         const sortCards = sortArray(data.cards);
         setCards([...sortCards]);
         setTries([...data.tries]);
         setGameData({...data});
+        newData = false;
       }      
     }
-  }, [gameData.curDay])
+
+    if(newData) {
+      const initialData = initialGameData(words[curDay], curDay);
+
+      setCards([...initialData.cards]);
+      setTries([...initialData.tries]);
+      setGameData({...initialData});
+    }
+  }, [])
 
   const handleGameOver = useCallback((hasWin: boolean) => {
     //Fim de Jogo
@@ -51,7 +64,10 @@ const FreneticMode: NextPage<FreneticModeProps> = ({ initialData }: FreneticMode
 
   return (
     <Container>
-      <Header subtitle="Modo Frenético"/>
+      <Head>
+        <title>CRIPTO | Frenético</title>
+      </Head>
+      <Header page='frenetic'/>
       <Main>
         <GameHeader
           leftContent={
@@ -59,7 +75,7 @@ const FreneticMode: NextPage<FreneticModeProps> = ({ initialData }: FreneticMode
               <Timer cards={cards} setCards={setCards} start={start}/>
             :
               <ButtonStart 
-                disabled={gameData.gameOver} 
+                disabled={gameData ? gameData.gameOver : true} 
                 onClick={() => setStart(true)}
               >Iniciar</ButtonStart>
           }
@@ -131,17 +147,6 @@ const Timer = ({cards, setCards, start}: TimerProps) => {
   return(
     <TextTimer>{zeroPad(counter.minute)}:{zeroPad(counter.second)}</TextTimer>
   );
-}
-
-export const getServerSideProps: GetServerSideProps = async () => {
-  const curDay = dayNumber();
-  const initialData = initialGameData(words[curDay], curDay);
-
-  return {
-    props: {
-      initialData
-    }
-  }
 }
 
 export default FreneticMode

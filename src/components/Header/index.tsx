@@ -17,11 +17,13 @@ import {
   TitleContainer 
 } from "./styles";
 
+export type PageName = 'classic' | 'frenetic' | 'about';
+
 interface HeaderProps {
-  subtitle?: string;
+  page: PageName;
 }
 
-export function Header({ subtitle }: HeaderProps) {
+export function Header({ page }: HeaderProps) {
   const { colors } = useContext(ThemeContext);
 
   const [
@@ -34,6 +36,16 @@ export function Header({ subtitle }: HeaderProps) {
   const focusButtonStyle = useMemo<CSSProperties>(() => ({
     backgroundColor: colors.darker,
   }), [colors.darker]);
+
+  let subtitle;
+  switch (page){
+    case 'classic':
+      subtitle = "Modo Clássico";
+      break;
+    case 'frenetic':
+      subtitle = "Modo Frenético";
+      break;
+  }
 
   const handleOutsideClick = (event: any) => {
     if(event.target?.id === 'overlay') {
@@ -102,7 +114,7 @@ export function Header({ subtitle }: HeaderProps) {
     <>
       <Container>
         <Content>
-          <Button onClick={handleOpenInstructions}>?</Button>
+          {(page !== 'about') && <Button onClick={handleOpenInstructions}>?</Button>}
           <TitleContainer>
             <Title>Cripto-memória</Title>
             {subtitle && <Subtitle>{subtitle}</Subtitle>}
@@ -113,7 +125,7 @@ export function Header({ subtitle }: HeaderProps) {
       {
         isInstructionsModalVisible && 
           <Modal onClose={() => setIsInstructionsModalVisible(false)}>
-            <GameInstructions />
+            <GameInstructions initialPage={page}/>
           </Modal>
       }
     </>

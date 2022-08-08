@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { GetServerSideProps, NextPage } from 'next'
+import { NextPage } from 'next'
 
 import { GameDataProps, initialGameData } from "../utils/data-utils";
 import { COLLECTION_EASY_CLASSIC } from "../configs/database";
+import { emptyWord } from "../utils/word-utils";
 import { dayNumber } from "../utils/date-utils";
 import { words } from '../data/easyClassicMode';
 
@@ -10,11 +11,12 @@ import { Container, Main } from "../global/styles/pages";
 
 import { LetterProps } from "../components/Letter";
 import GameHeader from "../components/GameHeader";
+import { CardProps } from "../components/Card";
 import { Header } from "../components/Header";
 import GameWord from "../components/GameWord";
-import { CardProps } from "../components/Card";
 import Grid from "../components/Grid";
-import { emptyWord } from "../utils/word-utils";
+import Head from "next/head";
+
 
 const Home: NextPage = () => {
   const [gameData, setGameData] = useState<GameDataProps>();
@@ -30,6 +32,7 @@ const Home: NextPage = () => {
     const storedData = localStorage.getItem(COLLECTION_EASY_CLASSIC);
     const curDay = dayNumber();
     let newData = true;
+
     if(storedData) {
       const data: GameDataProps = JSON.parse(storedData);
       
@@ -56,7 +59,10 @@ const Home: NextPage = () => {
   
   return (
     <Container>
-      <Header subtitle="Modo Clássico"/>
+      <Head>
+        <title>CRIPTO | Clássico</title>
+      </Head>
+      <Header page='classic'/>
       <Main>
         <GameHeader />
         <GameWord
