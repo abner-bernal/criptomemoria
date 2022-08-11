@@ -4,8 +4,9 @@ import { motion } from "framer-motion";
 
 export const Overlay = styled(motion.div)`
   width: 100%;
+  height: 100%;
   min-height: 100vh;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 10;
