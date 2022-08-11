@@ -19,6 +19,7 @@ import Grid from "../components/Grid";
 import { Container, Main } from "../global/styles/pages";
 import { emptyWord } from "../utils/word-utils";
 import Head from "next/head";
+import GameOverModal from "../components/GameOverModal";
 
 const FreneticMode: NextPage = () => {
   const [gameData, setGameData] = useState<GameDataProps>();
@@ -26,6 +27,7 @@ const FreneticMode: NextPage = () => {
     const empty = emptyWord(5);
     return [empty, empty, empty, empty]
   });
+  const [isGameOverModalOpen, setGameOverModalOpen] = useState<boolean>(false);
   const [cards, setCards] = useState<CardProps[]>();
   const [start, setStart] = useState<boolean>(false);
 
@@ -57,10 +59,12 @@ const FreneticMode: NextPage = () => {
     }
   }, [])
 
-  const handleGameOver = useCallback((hasWin: boolean) => {
-    //Fim de Jogo
-    setStart(false);
-  }, []);
+  useEffect(() => {
+    if(gameData?.gameOver) {
+      setStart(false);
+      setGameOverModalOpen(true);
+    }
+  }, [gameData?.gameOver])
 
   return (
     <Container>
@@ -86,7 +90,6 @@ const FreneticMode: NextPage = () => {
           setCards={setCards}
           gameData={gameData}
           setGameData={setGameData}
-          onGameOver={handleGameOver}
           letterPosition={letterPosition}
           COLLECTION={COLLECTION_EASY_FRENETIC}
         />
@@ -99,6 +102,12 @@ const FreneticMode: NextPage = () => {
           letterPosition={letterPosition}
         />
       </Main>
+      <GameOverModal
+        gameMode='frenetic' 
+        isOpen={isGameOverModalOpen}
+        setOpen={setGameOverModalOpen}
+        finalTry={gameData?.curRow}
+      />
     </Container>
   )
 }

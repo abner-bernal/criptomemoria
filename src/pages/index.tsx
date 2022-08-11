@@ -16,6 +16,7 @@ import { Header } from "../components/Header";
 import GameWord from "../components/GameWord";
 import Grid from "../components/Grid";
 import Head from "next/head";
+import GameOverModal from "../components/GameOverModal";
 
 
 const Home: NextPage = () => {
@@ -25,6 +26,7 @@ const Home: NextPage = () => {
     return [empty, empty, empty, empty]
   });
   const [cards, setCards] = useState<CardProps[]>();
+  const [isGameOverModalOpen, setGameOverModalOpen] = useState<boolean>(false);
 
   const letterPosition = useRef<number>(0);
 
@@ -53,9 +55,11 @@ const Home: NextPage = () => {
     }    
   }, [])
 
-  const handleGameOver = useCallback((hasWin: boolean) => {
-    //Fim de Jogo
-  }, []);
+  useEffect(() => {
+    if(gameData?.gameOver) {
+      setGameOverModalOpen(true);
+    }
+  }, [gameData?.gameOver])
   
   return (
     <Container>
@@ -71,7 +75,6 @@ const Home: NextPage = () => {
           setCards={setCards}
           gameData={gameData}
           setGameData={setGameData}
-          onGameOver={handleGameOver}
           letterPosition={letterPosition}
           COLLECTION={COLLECTION_EASY_CLASSIC}
         />
@@ -84,6 +87,12 @@ const Home: NextPage = () => {
           letterPosition={letterPosition}
         />
       </Main>
+      <GameOverModal 
+        gameMode='classic' 
+        isOpen={isGameOverModalOpen}
+        setOpen={setGameOverModalOpen}
+        finalTry={gameData?.curRow}
+      />
     </Container>
   )
 }

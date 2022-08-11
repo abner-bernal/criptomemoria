@@ -8,6 +8,7 @@ declare module 'styled-components' {
       overlay: string;
 
       gray10: string;
+      gray30: string;
       gray50: string;
       gray80: string;
       gray85: string;
@@ -17,8 +18,13 @@ declare module 'styled-components' {
       darker: string;
       
       pink50: string;
+
+      blue30: string;
       blue50: string;
+
       green50: string;
+      green60: string;
+
       purple30: string;
       purple50: string;
       purple70: string;

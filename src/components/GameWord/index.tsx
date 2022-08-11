@@ -12,7 +12,6 @@ interface GameWordProps {
   COLLECTION: string;
   gameData: GameDataProps | undefined;
   tries: LetterProps[][];
-  onGameOver: (hasWin: boolean) => void;
   letterPosition: MutableRefObject<number>;
   setGameData: (data: GameDataProps) => void;
   setTries: (tries: LetterProps[][]) => void;
@@ -24,7 +23,6 @@ function GameWord({
   setTries,
   setCards,
   gameData,
-  onGameOver,
   COLLECTION,
   setGameData,
   letterPosition, 
@@ -53,15 +51,11 @@ function GameWord({
       gameData.won = hasWon;
       gameData.gameOver = gameData.curRow === 3 || hasWon;
       
-      if(hasWon) {
-        onGameOver(true);
-      } else if(gameData.curRow === 3) {
-        onGameOver(false); //parâmetro se ganhou ou não
-      } else {
-        gameData.curRow++;
-        tries[gameData.curRow] = gameData.encryptedSolution;
+      if(gameData.curRow < 3 && !hasWon) {
+        tries[gameData.curRow + 1] = gameData.encryptedSolution;
       }
       
+      if(!hasWon) gameData.curRow++;
       gameData.tries = tries;
       gameData.cards = gameData.cards.map((item: CardProps) => {
         item.flipped = false;
@@ -78,8 +72,7 @@ function GameWord({
     setTries,
     gameData,
     setCards,
-    COLLECTION, 
-    onGameOver, 
+    COLLECTION,
     setGameData,
   ]);
 
