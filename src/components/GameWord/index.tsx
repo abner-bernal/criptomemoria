@@ -9,7 +9,7 @@ import { Letter, LetterProps } from "../Letter";
 import { CardProps } from "../Card";
 
 interface GameWordProps {
-  COLLECTION: string;
+  COLLECTION?: string;
   gameData: GameDataProps | undefined;
   tries: LetterProps[][];
   letterPosition: MutableRefObject<number>;
@@ -29,7 +29,7 @@ function GameWord({
 }: GameWordProps) {
 
   const checkHits = useCallback(() => {
-    if(gameData) {
+    if(gameData && COLLECTION) {
       let hasWon = true;
       
       const newRowState = gameData.solutionCards.map((card, index): LetterProps => {

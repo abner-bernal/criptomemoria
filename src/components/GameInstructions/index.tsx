@@ -1,6 +1,5 @@
 import { useCallback, useContext, useState } from "react";
 import { ThemeContext } from "styled-components";
-import { PageName } from "../Header";
 import { 
   ButtonStart, 
   CardsContainer, 
@@ -19,15 +18,15 @@ import {
 } from "./styles";
 
 interface GameInstructionsProps {
-  initialPage: PageName;
+  initialPage: string;
 }
 
 function GameInstructions({ initialPage }: GameInstructionsProps) {
   const [currentPage, setCurrentPage] = useState<number>(() => {
     switch (initialPage) {
-      case 'classic':
+      case '/':
         return 0; 
-      case 'frenetic':
+      case '/frenetic':
         return 1;
       default: return 0;
     }

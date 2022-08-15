@@ -3,7 +3,8 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: flex;
   justify-content: center;
-  max-width: 1280px;
+  width: 100%;
+  max-width: 828px;
   gap: 2rem;
   flex-direction: column;
   padding: 16px;
@@ -25,7 +26,6 @@ export const Container = styled.div`
 export const Content = styled.div`
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
   gap: 2rem;
   flex-direction: row;
   
@@ -39,5 +39,9 @@ export const Content = styled.div`
 
   @media(max-width: 540px) {
     gap: 0.4rem;
+  }
+
+  @media(max-width: 370px) {
+    flex-wrap: wrap;
   }
 `;

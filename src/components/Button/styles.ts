@@ -3,7 +3,8 @@ import styled from "styled-components";
 export const Container = styled.button`
   padding: 8px 20px;
   font-size: 2rem;
-  font-weight: 500;
+  font-weight: 400;
+  letter-spacing: 0.3px;
   cursor: pointer;
   line-height: 24px;
   color: ${props => props.theme.colors.highlight};

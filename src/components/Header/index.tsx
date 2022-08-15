@@ -1,79 +1,74 @@
 import Link from "next/link";
-import { CSSProperties, useCallback, useContext, useMemo, useState } from "react";
+import { useRouter } from "next/router";
+import { CSSProperties, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { ThemeContext } from "styled-components";
+import DropdownMenu from "../DropdownMenu";
 import { Ellipsis } from "../Ellipsis";
 import GameInstructions from "../GameInstructions";
 import Modal from "../Modal";
 import { 
   Button, 
   Container, 
-  Content, 
-  Dropdown, 
-  DropdownItem, 
-  ModalContainer, 
-  Overlay, 
+  Content,
   Subtitle, 
   Title, 
   TitleContainer 
 } from "./styles";
 
-export type PageName = 'classic' | 'frenetic' | 'about';
-
-interface HeaderProps {
-  page: PageName;
-}
-
-export function Header({ page }: HeaderProps) {
+export function Header() {
   const { colors } = useContext(ThemeContext);
+  
+  const [focused, setFocused] = useState<boolean>(false);
+
+  const { pathname } = useRouter();
 
   const [
     isInstructionsModalVisible, 
     setIsInstructionsModalVisible
   ] = useState(false);
 
-  const [dropdownMenuOpen, setDropdownMenuOpen] = useState(false);
+  const [isDropdownMenuOpen, setDropdownMenuOpen] = useState(false);
 
   const focusButtonStyle = useMemo<CSSProperties>(() => ({
     backgroundColor: colors.darker,
   }), [colors.darker]);
 
   let subtitle;
-  switch (page){
-    case 'classic':
+  switch (pathname){
+    case '/':
       subtitle = "Modo Clássico";
       break;
-    case 'frenetic':
+    case '/frenetic':
       subtitle = "Modo Frenético";
       break;
   }
 
-  const handleOutsideClick = (event: any) => {
-    if(event.target?.id === 'overlay') {
-      setDropdownMenuOpen(false);
-    }
+  const pages = [
+    {
+      href: '/',
+      name: 'Modo Clássico'
+    },
+    {
+      href: '/frenetic',
+      name: 'Modo Frenético'
+    },
+  ];
+
+  const menuItems = () => {
+    const rows = pages.map((item, index) => (
+      <Link href={item.href} passHref key={index}>
+        <a onClick={() => setDropdownMenuOpen(false)}>
+          {item.name}
+        </a>
+      </Link>
+    ));
+
+    return rows;
   }
 
-  const MenuContent = () => {
-    return(
-      <>
-        <Link href='/' passHref>
-          <DropdownItem onClick={() => setDropdownMenuOpen(false)}>
-            Modo Clássico
-          </DropdownItem>
-        </Link>
-        <Link href='/frenetic' passHref >
-          <DropdownItem onClick={() => setDropdownMenuOpen(false)}>
-            Modo Frenético
-          </DropdownItem>
-        </Link>
-        {/*
-        <Link href='/' passHref >
-          <DropdownItem onClick={() => setDropdownMenuOpen(false)}>
-            Créditos
-          </DropdownItem>
-        </Link>*/}
-      </>
-    )
+  const handleButtonClick = () => {
+    setDropdownMenuOpen(!isDropdownMenuOpen);
+    setFocused(true);
   }
 
   const handleOpenInstructions = () => {
@@ -81,51 +76,41 @@ export function Header({ page }: HeaderProps) {
     setIsInstructionsModalVisible(true);
   }
 
-  const RightButton = useCallback(() => {
-    return(
-      <>
-        {
-          dropdownMenuOpen && 
-            <Overlay id='overlay' onClick={handleOutsideClick}>
-              <ModalContainer>
-                <MenuContent />
-              </ModalContainer>
-            </Overlay>
-        }
-        <div style={{position: 'relative'}}>
-          <Button 
-            onClick={() => setDropdownMenuOpen(!dropdownMenuOpen)}
-            style={dropdownMenuOpen ? focusButtonStyle : undefined}
-          >
-            <Ellipsis />
-          </Button>
-          {
-            dropdownMenuOpen && 
-              <Dropdown>
-                <MenuContent />
-              </Dropdown>
-          }
-        </div>
-      </>
-    );
-  }, [dropdownMenuOpen, focusButtonStyle]);
+  useEffect(() => {
+    if(!isDropdownMenuOpen){
+      setTimeout(() => {
+        setFocused(false)
+      }, 500)
+    }
+  }, [isDropdownMenuOpen])
 
   return(
     <>
       <Container>
         <Content>
-          {(page !== 'about') && <Button onClick={handleOpenInstructions}>?</Button>}
+          {(pathname !== 'about') && <Button onClick={handleOpenInstructions}>?</Button>}
           <TitleContainer>
             <Title>Cripto-memória</Title>
             {subtitle && <Subtitle>{subtitle}</Subtitle>}
           </TitleContainer>
-          <RightButton />
+          <DropdownMenu
+            menuItems={menuItems()}
+            isOpen={isDropdownMenuOpen}
+            setOpen={setDropdownMenuOpen}
+          >
+            <Button 
+              onClick={handleButtonClick}
+              style={focused ? focusButtonStyle : undefined}
+            >
+              <Ellipsis />
+            </Button>
+          </DropdownMenu>
         </Content>
       </Container>
       {
         isInstructionsModalVisible && 
           <Modal onClose={() => setIsInstructionsModalVisible(false)}>
-            <GameInstructions initialPage={page}/>
+            <GameInstructions initialPage={pathname}/>
           </Modal>
       }
     </>

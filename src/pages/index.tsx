@@ -1,37 +1,66 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { NextPage } from 'next'
+import Head from "next/head";
+
+import { medium } from "../data/mediumClassicMode";
+import { easy } from '../data/easyClassicMode';
+import { hard } from "../data/hardClassicMode";
+import { 
+  COLLECTION_MEDIUM_CLASSIC, 
+  COLLECTION_EASY_CLASSIC, 
+  COLLECTION_HARD_CLASSIC, 
+  CLASSIC_CURRENT_LEVEL,
+} from "../configs/database";
 
 import { GameDataProps, initialGameData } from "../utils/data-utils";
-import { COLLECTION_EASY_CLASSIC } from "../configs/database";
-import { emptyWord } from "../utils/word-utils";
 import { dayNumber } from "../utils/date-utils";
-import { words } from '../data/easyClassicMode';
+import { emptyWord } from "../utils/word-utils";
 
-import { Container, Main } from "../global/styles/pages";
-
+import GameHeader, { GameLevel } from "../components/GameHeader";
+import GameOverModal from "../components/GameOverModal";
 import { LetterProps } from "../components/Letter";
-import GameHeader from "../components/GameHeader";
 import { CardProps } from "../components/Card";
-import { Header } from "../components/Header";
 import GameWord from "../components/GameWord";
 import Grid from "../components/Grid";
-import Head from "next/head";
-import GameOverModal from "../components/GameOverModal";
-
 
 const Home: NextPage = () => {
-  const [gameData, setGameData] = useState<GameDataProps>();
+  const [isGameOverModalOpen, setGameOverModalOpen] = useState<boolean>(false);
   const [tries, setTries] = useState<LetterProps[][]>(() => {
     const empty = emptyWord(5);
     return [empty, empty, empty, empty]
   });
+  const [gameData, setGameData] = useState<GameDataProps>();
+  const [level, setLevel] = useState<GameLevel>('easy');
   const [cards, setCards] = useState<CardProps[]>();
-  const [isGameOverModalOpen, setGameOverModalOpen] = useState<boolean>(false);
 
   const letterPosition = useRef<number>(0);
+  const collectionMode = useRef<string>();
+  const words = useRef<string[]>();
 
   useEffect(() => {
-    const storedData = localStorage.getItem(COLLECTION_EASY_CLASSIC);
+    const storedCurLevel = localStorage.getItem(CLASSIC_CURRENT_LEVEL);
+    const curLevel: GameLevel = storedCurLevel 
+      ? JSON.parse(storedCurLevel) 
+      : undefined;
+
+    if(curLevel && curLevel !== level) setLevel(curLevel);
+
+    switch (curLevel) {
+      case 'medium':
+        words.current = medium;
+        collectionMode.current = COLLECTION_MEDIUM_CLASSIC;
+        break;
+      case 'hard':
+        words.current = hard;
+        collectionMode.current = COLLECTION_HARD_CLASSIC;
+        break;
+      default:
+        words.current = easy;
+        collectionMode.current = COLLECTION_EASY_CLASSIC;
+        break;
+    }
+
+    const storedData = localStorage.getItem(collectionMode.current);
     const curDay = dayNumber();
     let newData = true;
 
@@ -47,13 +76,13 @@ const Home: NextPage = () => {
     }
 
     if(newData) {
-      const initialData = initialGameData(words[curDay], curDay);
+      const initialData = initialGameData(words.current[curDay], curDay);
 
       setCards([...initialData.cards]);
       setTries([...initialData.tries]);
       setGameData({...initialData});
-    }    
-  }, [])
+    } 
+  }, [level])
 
   useEffect(() => {
     if(gameData?.gameOver) {
@@ -62,38 +91,38 @@ const Home: NextPage = () => {
   }, [gameData?.gameOver])
   
   return (
-    <Container>
+    <>
       <Head>
         <title>CRIPTO | Clássico</title>
       </Head>
-      <Header page='classic'/>
-      <Main>
-        <GameHeader />
-        <GameWord
-          tries={tries}
-          setTries={setTries}
-          setCards={setCards}
-          gameData={gameData}
-          setGameData={setGameData}
-          letterPosition={letterPosition}
-          COLLECTION={COLLECTION_EASY_CLASSIC}
-        />
-        <Grid 
-          cards={cards}
-          tries={tries}
-          setTries={setTries}
-          gameData={gameData}
-          active={!gameData?.gameOver}
-          letterPosition={letterPosition}
-        />
-      </Main>
-      <GameOverModal 
-        gameMode='classic' 
+      <Grid 
+        cards={cards}
+        tries={tries}
+        setTries={setTries}
+        gameData={gameData}
+        active={!gameData?.gameOver}
+        letterPosition={letterPosition}
+      />
+      <GameWord
+        tries={tries}
+        setTries={setTries}
+        setCards={setCards}
+        gameData={gameData}
+        COLLECTION={collectionMode.current}
+        setGameData={setGameData}
+        letterPosition={letterPosition}
+      />
+      <GameHeader 
+        level={level} 
+        setLevel={setLevel} 
+        GameMode={CLASSIC_CURRENT_LEVEL}
+      />
+      <GameOverModal
         isOpen={isGameOverModalOpen}
         setOpen={setGameOverModalOpen}
         finalTry={gameData?.curRow}
       />
-    </Container>
+    </>
   )
 }
 

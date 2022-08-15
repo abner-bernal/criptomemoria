@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.header`
   width: 100%;
   min-height: 70px;
-  z-index: 1;
+  top: 0;
   position: fixed;
   display: flex;
   align-items: center;
@@ -80,72 +80,5 @@ export const Subtitle = styled.span`
 
   @media(max-width: 540px) {
     font-size: 1.5rem;
-  }
-`;
-
-const MenuContainer = styled.div`
-  background-color: ${props => props.theme.colors.gray85};
-  flex-direction: column;
-  display: flex;
-  padding: 20px;
-  gap: 12px;
-`;
-
-export const Dropdown = styled(MenuContainer)`
-  position: absolute;
-  margin-top: 5px;
-  border-radius: 14px;
-  width: 280px;
-  right: 0;
-  box-shadow: 0 0 12px ${props => props.theme.colors.gray95};
-
-  @media (max-width: 540px) {
-    display: none;
-  }
-`;
-
-export const DropdownItem = styled.a`
-  display: flex;
-  height: 50px;
-  align-items: center;
-  padding-left: 34px;
-  border-radius: 25px;
-  background-color: ${props => props.theme.colors.gray85};
-  transition: filter 300ms;
-  font-size: 1.8rem;
-  color: ${props => props.theme.colors.highlight};
-
-  &:hover {
-    filter: brightness(1.5);
-  }
-
-  @media (max-width: 540px) {
-    filter: brightness(1.5);
-  }
-`;
-
-export const Overlay = styled.div`
-  width: 100%;
-  height: 100%;
-  min-height: 100vh;
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  
-  @media (max-width: 540px) {
-    background-color: ${props => props.theme.colors.overlay};
-    padding: 0 16px;
-    z-index: 10;
-  }
-`;
-
-export const ModalContainer = styled(MenuContainer)`
-  border-radius: 30px;
-
-  @media (min-width: 540px) {
-    display: none;
   }
 `;

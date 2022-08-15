@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { MouseEvent, SetStateAction, useContext } from "react";
 import { ThemeContext } from "styled-components";
 import CloseButton from "../CloseButton";
@@ -9,7 +10,6 @@ interface GameOverModalProps {
   finalTry?: number;
   isOpen: boolean;
   setOpen: (value: SetStateAction<boolean>) => void;
-  gameMode: 'classic' | 'frenetic';
 } 
 
 const overlayVariants = {
@@ -34,7 +34,8 @@ const ModalVariants = {
   },
 }
 
-function GameOverModal({ finalTry = 5, gameMode, isOpen, setOpen }: GameOverModalProps) {
+function GameOverModal({ finalTry = 5, isOpen, setOpen }: GameOverModalProps) {
+  const { pathname } = useRouter();
 
   const handleOutsideClick = (e: MouseEvent<HTMLDivElement>) => {
     const clickable = e.target as HTMLDivElement;
@@ -47,12 +48,12 @@ function GameOverModal({ finalTry = 5, gameMode, isOpen, setOpen }: GameOverModa
 
   let path: string;
   let linkText: string;
-  switch (gameMode) {
-    case 'classic':
+  switch (pathname) {
+    case '/':
       path = '/frenetic';
       linkText = 'Jogar Modo Frenético';
       break;
-    case 'frenetic':
+    default:
       path = '/';
       linkText = 'Jogar Modo Clássico';
       break;

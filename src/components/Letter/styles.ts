@@ -1,8 +1,12 @@
 import styled from "styled-components";
 
 export const Title = styled.span`
-  width: 70px;
-  height: 70px;
+  max-width: 70px;
+  max-height: 70px;
+  min-height: 32px;
+  width: 100%;
+  height: 100%;
+  min-width: 32px;
   aspect-ratio: 1/1;
   align-items: center;
   justify-content: center;
@@ -17,8 +21,8 @@ export const Title = styled.span`
   display: flex;  
   
   @media(max-width: 820px) {
-    width: 60px;
-    height: 60px;
+    max-width: 60px;
+    max-height: 60px;
     border-radius: 8px;
   }
   
@@ -27,15 +31,16 @@ export const Title = styled.span`
   }
 
   @media(max-width: 540px) {
-    width: 49px;
-    height: 49px;
+    max-width: 49px;
+    max-height: 49px;
     border-radius: 6px;
     font-size: 2rem;
   }
 
   @media(max-width: 414px) {
-    width: 44px;
-    height: 44px;
+    max-width: 44px;
+    max-height: 44px;
+    font-size: 1.7rem;
   }
 
   @media(max-width: 300px) {

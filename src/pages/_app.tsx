@@ -6,6 +6,9 @@ import { theme } from '../global/styles/theme'
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import LoadScreen from '../components/LoadScreen';
+import { Header } from '../components/Header';
+
+import { Container, Main } from '../global/styles/pages';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -40,7 +43,12 @@ function MyApp({ Component, pageProps }: AppProps) {
     <ThemeProvider theme={theme}>
       {loading && <LoadScreen />}
       <GlobalStyle />
-      <Component {...pageProps} />
+      <Container>
+        <Main>
+          <Component {...pageProps} />
+        </Main>
+        <Header />
+      </Container>
     </ThemeProvider>
   )
 }

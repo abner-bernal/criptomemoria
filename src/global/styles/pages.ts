@@ -12,7 +12,7 @@ export const Main = styled.main`
   width: 100%;
   flex: 1;
   padding-top: 70px;
-  flex-direction: column;
+  flex-direction: column-reverse;
   align-items: center;
   justify-content: space-evenly;
 

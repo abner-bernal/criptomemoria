@@ -8,13 +8,18 @@ export const GlobalStyle = createGlobalStyle`
     border: none;
     text-decoration: none;
   }
+
+  button {
+    background-color: transparent;
+  }
   
   html {
     font-size: 62.5%;
   }
 
-  a {
+  a, button {
     color: ${props => props.theme.colors.highlight};
+    cursor: pointer;
   }
   
   body {
