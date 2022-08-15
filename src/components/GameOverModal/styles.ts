@@ -1,24 +1,19 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 
 import { motion } from "framer-motion";
 
 export const Overlay = styled(motion.div)`
-  width: 100%;
-  height: 100%;
-  min-height: 100vh;
-  position: fixed;
   top: 0;
   left: 0;
+  width: 100%;
   z-index: 10;
-  background-color: ${props => props.theme.colors.overlay};
-  display: none;
   opacity: 0;
-  justify-content: center;
+  min-height: 100vh;
+  display: none;
+  position: fixed;
   align-items: center;
-
-  @media(max-width: 820px) {
-
-  }
+  justify-content: center;
+  background-color: ${props => props.theme.colors.overlay};
 `;
 
 export const Container = styled(motion.div)`

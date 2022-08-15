@@ -3,8 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: grid;
   width: 100%;
-  max-width: 860px;
-  padding: 16px;
+  padding: 16px 0;
   grid-template-columns: repeat(5, 1fr);
   gap: 2rem;
   
@@ -21,7 +20,6 @@ export const Container = styled.div`
   }
   
   @media(max-width: 540px) {
-    padding: 16px 8px;
     gap: 0.2rem;
     grid-template-columns: repeat(4, 1fr);
   }

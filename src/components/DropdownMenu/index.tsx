@@ -48,7 +48,7 @@ const navigationVar = {
     opacity: 1,
     transition: {
       type: "spring",
-      duration: 0.6,
+      duration: 0.4,
       bounce: 0.5,
     }
   },
@@ -133,9 +133,9 @@ function DropdownMenu({isOpen, setOpen, children, menuItems, navWidth}: Dropdown
           <Navigation variants={navigationVar}>
             <Menu 
               initial={false}
-              custom={height}
               width={navWidth}
               variants={menuVar}
+              custom={height}
               ref={containerRef}
             >
               {

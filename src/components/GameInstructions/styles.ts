@@ -1,10 +1,37 @@
 import styled from "styled-components";
 
+import { motion } from "framer-motion";
+
 import { Card } from "../Card";
 import { Letter } from "../Letter";
+import CloseButton from "../CloseButton";
 
-export const Container = styled.div`
+export const Overlay = styled(motion.div)`
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  padding: 24px 0;
+  min-height: 100vh;
+  display: flex;
+  opacity: 0;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  background-color: ${props => props.theme.colors.overlay};
+
+  @media(max-width: 820px) {
+    padding-top: 60px;
+    padding-bottom: 0;
+    align-items: flex-end;
+  }
+`;
+
+export const Container = styled(motion.div)`
+  background-color: ${props => props.theme.colors.gray85};
+  border-radius: 30px;
   flex-direction: column;
+  max-width: 1028px;
   display: flex;
   padding: 48px 48px 32px;
   gap: 48px;
@@ -12,6 +39,12 @@ export const Container = styled.div`
   @media(max-width: 540px) {
     padding: 32px 24px;
   }
+
+  @media(max-width: 820px) {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
 `;
 
 export const PageContainer = styled.div`
@@ -138,4 +171,9 @@ export const PageIndex = styled.button`
   cursor: pointer;
   color: ${props => props.theme.colors.highlight};
   background-color: ${props => props.theme.colors.gray80};
+`;
+
+export const CloseB = styled(CloseButton)`
+  border: 1px solid ${props => props.theme.colors.gray80};
+  background-color: transparent;
 `;

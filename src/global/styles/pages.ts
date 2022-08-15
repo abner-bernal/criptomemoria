@@ -10,13 +10,17 @@ export const Container = styled.div`
 export const Main = styled.main`
   display: flex;
   width: 100%;
+  height: 100%;
+  position: fixed;
+  overflow-y: auto;
   flex: 1;
-  padding-top: 70px;
+  max-width: 860px;
+  padding: 70px 16px 0;
   flex-direction: column-reverse;
   align-items: center;
   justify-content: space-evenly;
 
   @media(max-width: 540px) {
-    padding-top: 64px;
+    padding: 64px 8px 0;
   }
 `;

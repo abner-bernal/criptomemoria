@@ -5,7 +5,7 @@ import { ThemeContext } from "styled-components";
 import DropdownMenu from "../DropdownMenu";
 import { Ellipsis } from "../Ellipsis";
 import GameInstructions from "../GameInstructions";
-import Modal from "../Modal";
+
 import { 
   Button, 
   Container, 
@@ -23,8 +23,8 @@ export function Header() {
   const { pathname } = useRouter();
 
   const [
-    isInstructionsModalVisible, 
-    setIsInstructionsModalVisible
+    isInstructionModalOpen, 
+    setIsInstructionModalOpen
   ] = useState(false);
 
   const [isDropdownMenuOpen, setDropdownMenuOpen] = useState(false);
@@ -73,7 +73,7 @@ export function Header() {
 
   const handleOpenInstructions = () => {
     setDropdownMenuOpen(false);
-    setIsInstructionsModalVisible(true);
+    setIsInstructionModalOpen(true);
   }
 
   useEffect(() => {
@@ -107,12 +107,11 @@ export function Header() {
           </DropdownMenu>
         </Content>
       </Container>
-      {
-        isInstructionsModalVisible && 
-          <Modal onClose={() => setIsInstructionsModalVisible(false)}>
-            <GameInstructions initialPage={pathname}/>
-          </Modal>
-      }
+      <GameInstructions 
+        initialPage={pathname} 
+        isOpen={isInstructionModalOpen} 
+        setOpen={setIsInstructionModalOpen}
+      />
     </>
   );
 }

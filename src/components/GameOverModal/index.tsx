@@ -39,11 +39,7 @@ function GameOverModal({ finalTry = 5, isOpen, setOpen }: GameOverModalProps) {
 
   const handleOutsideClick = (e: MouseEvent<HTMLDivElement>) => {
     const clickable = e.target as HTMLDivElement;
-    if(clickable.id === 'overlay') handleCloseModal();
-  }
-
-  const handleCloseModal = () => {
-    setOpen(false);
+    if(clickable.id === 'overlay') setOpen(false);
   }
 
   let path: string;
@@ -93,10 +89,9 @@ function GameOverModal({ finalTry = 5, isOpen, setOpen }: GameOverModalProps) {
       transition={{ duration: 0.25 }}
     >
       <Container
-        animate={isOpen ? "open" : "closed"}
         variants={ModalVariants}
       >
-        <CloseButton onClick={handleCloseModal} />
+        <CloseButton onClick={() => setOpen(false)} />
         {finalTry < 4 && <MedalIcon />}
         <Title>{title} {finalTry > 3 && <span role="img" aria-label="crying face">😢</span>}</Title>
         <Subtitle>{subtitle}</Subtitle>
