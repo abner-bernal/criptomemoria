@@ -10,9 +10,6 @@ export const Container = styled.div`
 export const Main = styled.main`
   display: flex;
   width: 100%;
-  height: 100%;
-  position: fixed;
-  overflow-y: auto;
   flex: 1;
   max-width: 860px;
   padding: 70px 16px 0;
