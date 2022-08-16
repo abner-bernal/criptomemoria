@@ -68,11 +68,6 @@ type DimensionsProps = {
 function GameInstructions({ initialPage, isOpen, setOpen }: GameInstructionsProps) {
   const { colors } = useContext(ThemeContext);
 
-  console.log(initialPage);
-  const containerRef = useRef(null);
-
-  const { height } = useDimensions(containerRef);
-
   const [dimensions, setDimensions] = useState<DimensionsProps>({ height: 0, width: 820 });
 
   const initialPageNumber = useCallback(() => {
@@ -162,10 +157,8 @@ function GameInstructions({ initialPage, isOpen, setOpen }: GameInstructionsProp
       variants={overlayVariants}
     >
       <Container
-        custom={height}
         initial="closed"
         animate={isOpen ? "open" : "closed"}
-        ref={containerRef}
         variants={dimensions.width <= 820 ? ModalVariantsSmall : ModalVariants}
       >
         {page()}

@@ -7,6 +7,10 @@ export const Container = styled.div`
   width: 100%;
   padding: 16px 0;
   align-items: center;
+
+  @media(max-width: 540px) {
+    padding: 16px 8px;
+  }
 `;
 
 export const ButtonLevel = styled(Button)`
