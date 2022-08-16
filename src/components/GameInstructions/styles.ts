@@ -14,7 +14,8 @@ export const Overlay = styled(motion.div)`
   padding: 24px 0;
   min-height: 100vh;
   display: flex;
-  overscroll-behavior-y: none;
+  overscroll-behavior-y: unset;
+  scroll-behavior: unset;
   opacity: 0;
   position: absolute;
   align-items: center;
