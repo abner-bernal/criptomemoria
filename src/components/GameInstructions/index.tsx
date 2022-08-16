@@ -48,14 +48,14 @@ const ModalVariantsSmall = {
       type: "spring",
       delay: 0.10,
       duration: 0.2,
-      stiffness: 260,
+      stiffness: 150,
       damping: 20,
     }
   },
-  closed: (height = 1000) => ({ 
+  closed: (height = 1170) => ({ 
     y: height,
     transition: {
-      duration: 0.2,
+      duration: 0.25,
     }
   })
 }
@@ -68,11 +68,24 @@ type DimensionsProps = {
 function GameInstructions({ initialPage, isOpen, setOpen }: GameInstructionsProps) {
   const { colors } = useContext(ThemeContext);
 
+  console.log(initialPage);
   const containerRef = useRef(null);
 
   const { height } = useDimensions(containerRef);
 
   const [dimensions, setDimensions] = useState<DimensionsProps>({ height: 0, width: 820 });
+
+  const initialPageNumber = useCallback(() => {
+    switch (initialPage) {
+      case '/':
+        return 0; 
+      case '/frenetic':
+        return 1;
+      default: return 0;
+    }
+  }, [initialPage])
+
+  const [currentPage, setCurrentPage] = useState<number>(initialPageNumber());
 
   const overlayVariants = {
     open: { 
@@ -83,22 +96,16 @@ function GameInstructions({ initialPage, isOpen, setOpen }: GameInstructionsProp
     closed: { 
       opacity: 0,
       transition: {
-        delay: dimensions.width <= 820 ? 0.2 : 0,
-        duration: dimensions.width <= 820 ? 0.15 : 0.25
+        delay: dimensions.width <= 820 ? 0.25 : 0,
+        duration: dimensions.width <= 820 ? 0.2 : 0.25
       },
       transitionEnd: { display: "none" }
     },
   }
 
-  const [currentPage, setCurrentPage] = useState<number>(() => {
-    switch (initialPage) {
-      case '/':
-        return 0; 
-      case '/frenetic':
-        return 1;
-      default: return 0;
-    }
-  });
+  useEffect(() => {
+    setCurrentPage(initialPageNumber());
+  }, [initialPage, initialPageNumber])
 
   const page = () => {
     switch (currentPage) {

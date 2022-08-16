@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { CSSProperties, useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { CSSProperties, SetStateAction, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { ThemeContext } from "styled-components";
 import DropdownMenu from "../DropdownMenu";
 import { Ellipsis } from "../Ellipsis";
@@ -15,17 +15,16 @@ import {
   TitleContainer 
 } from "./styles";
 
-export function Header() {
+interface HeaderProps {
+  setIsInstructionModalOpen: (value: SetStateAction<boolean>) => void;
+}
+
+export function Header({ setIsInstructionModalOpen }: HeaderProps) {
   const { colors } = useContext(ThemeContext);
   
   const [focused, setFocused] = useState<boolean>(false);
 
   const { pathname } = useRouter();
-
-  const [
-    isInstructionModalOpen, 
-    setIsInstructionModalOpen
-  ] = useState(false);
 
   const [isDropdownMenuOpen, setDropdownMenuOpen] = useState(false);
 
@@ -85,33 +84,26 @@ export function Header() {
   }, [isDropdownMenuOpen])
 
   return(
-    <>
-      <Container>
-        <Content>
-          {(pathname !== 'about') && <Button onClick={handleOpenInstructions}>?</Button>}
-          <TitleContainer>
-            <Title>Cripto-memória</Title>
-            {subtitle && <Subtitle>{subtitle}</Subtitle>}
-          </TitleContainer>
-          <DropdownMenu
-            menuItems={menuItems()}
-            isOpen={isDropdownMenuOpen}
-            setOpen={setDropdownMenuOpen}
+    <Container>
+      <Content>
+        {(pathname !== 'about') && <Button onClick={handleOpenInstructions}>?</Button>}
+        <TitleContainer>
+          <Title>Cripto-memória</Title>
+          {subtitle && <Subtitle>{subtitle}</Subtitle>}
+        </TitleContainer>
+        <DropdownMenu
+          menuItems={menuItems()}
+          isOpen={isDropdownMenuOpen}
+          setOpen={setDropdownMenuOpen}
+        >
+          <Button 
+            onClick={handleButtonClick}
+            style={focused ? focusButtonStyle : undefined}
           >
-            <Button 
-              onClick={handleButtonClick}
-              style={focused ? focusButtonStyle : undefined}
-            >
-              <Ellipsis />
-            </Button>
-          </DropdownMenu>
-        </Content>
-      </Container>
-      <GameInstructions 
-        initialPage={pathname} 
-        isOpen={isInstructionModalOpen} 
-        setOpen={setIsInstructionModalOpen}
-      />
-    </>
+            <Ellipsis />
+          </Button>
+        </DropdownMenu>
+      </Content>
+    </Container>
   );
 }
