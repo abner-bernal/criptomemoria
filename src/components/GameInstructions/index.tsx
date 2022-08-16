@@ -44,6 +44,7 @@ const ModalVariants = {
 const ModalVariantsSmall = {
   open: {
     y: 0,
+    scale: 1,
     transition: {
       type: "spring",
       delay: 0.10,
@@ -54,6 +55,7 @@ const ModalVariantsSmall = {
   },
   closed: (height = 1170) => ({ 
     y: height,
+    scale: 1,
     transition: {
       duration: 0.25,
     }
@@ -68,7 +70,7 @@ type DimensionsProps = {
 function GameInstructions({ initialPage, isOpen, setOpen }: GameInstructionsProps) {
   const { colors } = useContext(ThemeContext);
 
-  const [dimensions, setDimensions] = useState<DimensionsProps>({ height: 0, width: 820 });
+  const [dimensions, setDimensions] = useState<DimensionsProps>({ height: 0, width: 1000 });
 
   const initialPageNumber = useCallback(() => {
     switch (initialPage) {
@@ -145,7 +147,7 @@ function GameInstructions({ initialPage, isOpen, setOpen }: GameInstructionsProp
   useEffect(() => {  
     setDimensions({
       height: window.screen.availHeight,
-      width: window.screen.availWidth
+      width: window.screen.width
     });
   }, []);
 
