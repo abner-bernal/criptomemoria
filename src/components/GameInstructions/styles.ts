@@ -15,8 +15,6 @@ export const Overlay = styled(motion.div)`
   min-height: 100vh;
   display: flex;
   overscroll-behavior-y: none;
-  overscroll-behavior-y: unset;
-  scroll-behavior: unset;
   opacity: 0;
   position: absolute;
   align-items: center;
@@ -33,9 +31,6 @@ export const Overlay = styled(motion.div)`
 export const Container = styled(motion.div)`
   background-color: ${props => props.theme.colors.gray85};
   border-radius: 30px;
-  overscroll-behavior-y: none;
-  overscroll-behavior-y: unset;
-  scroll-behavior: unset;
   flex-direction: column;
   max-width: 1028px;
   display: flex;
