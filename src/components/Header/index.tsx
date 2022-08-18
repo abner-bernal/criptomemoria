@@ -51,6 +51,10 @@ export function Header({ setIsInstructionModalOpen }: HeaderProps) {
       href: '/frenetic',
       name: 'Modo Frenético'
     },
+    {
+      href: '/about',
+      name: 'Créditos'
+    },
   ];
 
   const menuItems = () => {
@@ -86,7 +90,7 @@ export function Header({ setIsInstructionModalOpen }: HeaderProps) {
   return(
     <Container>
       <Content>
-        {(pathname !== 'about') && <Button onClick={handleOpenInstructions}>?</Button>}
+        {(pathname !== '/about') && <Button onClick={handleOpenInstructions}>?</Button>}
         <TitleContainer>
           <Title>Cripto-memória</Title>
           {subtitle && <Subtitle>{subtitle}</Subtitle>}

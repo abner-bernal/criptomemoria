@@ -49,7 +49,7 @@ const navigationVar = {
     transition: {
       type: "spring",
       duration: 0.4,
-      bounce: 0.5,
+      bounce: 0.4,
     }
   },
   closed: { 
@@ -66,7 +66,7 @@ const menuVar = {
     clipPath: `circle(${height * 2 + 200}px at 93% 18px)`,
     transition: { 
       type: "spring",
-      stiffness: 26,
+      stiffness: 30,
       restDelta: 2,
       staggerChildren: 0.07, 
       delayChildren: 0.2 
@@ -76,7 +76,6 @@ const menuVar = {
     clipPath: 'circle(18px at 93% 18px)',
     transition: { 
       type: "spring",
-      duration: 0.6,
       delay: 0.3,
       staggerChildren: 0.03, 
       staggerDirection: -1 

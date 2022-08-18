@@ -1,15 +1,17 @@
-import { ThemeProvider } from 'styled-components'
-import type { AppProps } from 'next/app'
-
-import { GlobalStyle } from '../global/styles'
-import { theme } from '../global/styles/theme'
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
-import LoadScreen from '../components/LoadScreen';
-import { Header } from '../components/Header';
+import type { AppProps } from 'next/app'
+import Head from 'next/head';
+
+import { ThemeProvider } from 'styled-components'
 
 import { Container, Main } from '../global/styles/pages';
+import { GlobalStyle } from '../global/styles'
+import { theme } from '../global/styles/theme'
+
 import GameInstructions from '../components/GameInstructions';
+import LoadScreen from '../components/LoadScreen';
+import { Header } from '../components/Header';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -59,14 +61,27 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <ThemeProvider theme={theme}>
-      {loading && <LoadScreen />}
+      <Head>
+        <title>CriptoMemória</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" /> 
+      </Head>
       <GlobalStyle />
+      {loading && <LoadScreen />}
+
       <Container>
-        <Main id='main'>
+        <Main 
+          id='main' 
+          style={
+            pathname !== '/about' 
+              ? {flexDirection: 'column-reverse'} : undefined
+          }
+        >
           <Component {...pageProps} />
         </Main>
         <Header setIsInstructionModalOpen={setIsInstructionModalOpen}/>
       </Container>
+
       <GameInstructions
         initialPage={pathname} 
         isOpen={isInstructionModalOpen} 

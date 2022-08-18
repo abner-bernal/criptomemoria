@@ -13,6 +13,7 @@ declare module 'styled-components' {
       gray80: string;
       gray85: string;
       gray90: string;
+      gray90Soft: string;
       gray95: string;
 
       darker: string;
@@ -21,6 +22,8 @@ declare module 'styled-components' {
 
       blue30: string;
       blue50: string;
+      bluePayPal50: string;
+      bluePayPal80: string;
 
       green50: string;
       green60: string;

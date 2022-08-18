@@ -236,7 +236,7 @@ const FreneticMode = () => {
         <ButtonStart>Iniciar</ButtonStart>
         <Text>inicializa o jogo e distribui as cartas.</Text>
       </TextAndPieceContainer>
-      <Text>O tempo para concluir a sequência correta das cartas é relativo ao tamanho da palavra</Text>
+      <Text>O tempo para concluir a sequência correta das cartas é relativo ao tamanho da palavra.</Text>
       <Text>
         Quando o tempo zera todos as cartas são embaralhadas, 
         reiniciando o jogo.

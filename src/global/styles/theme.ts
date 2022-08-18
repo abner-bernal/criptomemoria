@@ -10,6 +10,7 @@ export const theme = {
     gray80: '#242424',
     gray85: '#121212',
     gray90: '#090909',
+    gray90Soft: 'rgba(9,9,9,0.5)',
     gray95: '#070707',
 
     darker: '#000000',
@@ -18,7 +19,9 @@ export const theme = {
 
     blue30: '#00dcff',
     blue50: '#009CD6',
-
+    bluePayPal50: '#009cde',
+    bluePayPal80: '#003087',
+    
     green50: '#00CB6C',
     green60: '#00A437',
 

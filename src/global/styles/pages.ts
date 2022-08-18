@@ -14,7 +14,7 @@ export const Main = styled.main`
   flex: 1;
   max-width: 860px;
   padding: 70px 16px 0;
-  flex-direction: column-reverse;
+  flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
 
