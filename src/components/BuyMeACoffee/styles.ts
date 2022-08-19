@@ -4,7 +4,9 @@ import CoffeeCupIcon from "../CoffeeCupIcon";
 export const DonateButton = styled.button`
 height: 42px;
 border-radius: 22px;
-padding: 7px 36px;
+width: 100%;
+max-width: 300px;
+padding: 7px 24px;
 margin: 16px 0;
 background-image: linear-gradient(to bottom right, ${props => props.theme.colors.gray80}, ${props => props.theme.colors.gray85});
 
