@@ -19,6 +19,7 @@ span {
   font-size: 2rem;
   line-height: 24px;
   font-weight: 400;
+  margin-top: -1px;
   color: ${props => props.theme.colors.gray10};
 }
 
