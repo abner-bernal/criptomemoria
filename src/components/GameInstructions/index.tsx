@@ -174,10 +174,7 @@ const ClassicMode = () => {
   return(
     <PageContainer>
       <Title>Modo Clássico</Title>
-      <TextContainer>
-        <Text>Descriptografe a palavra mistério em três tentativas.</Text>
-        <Text>Encontre as cartas com os símbolos correspondentes as letras criptografadas.</Text>
-      </TextContainer>
+      <Text>Descriptografe a palavra mistério em três tentativas.</Text>
       <Word>
         <Piece char="s" status="decrypted" />
         <Piece char="o" status="decrypted" />

@@ -5,6 +5,7 @@ export const Container = styled.div`
   flex-direction: column;
   min-height: 100vh;
   align-items: center;
+  transition: all 0.3s ease-in-out;
 `;
 
 export const Main = styled.main`
