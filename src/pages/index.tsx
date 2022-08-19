@@ -22,6 +22,7 @@ import { LetterProps } from "../components/Letter";
 import { CardProps } from "../components/Card";
 import GameWord from "../components/GameWord";
 import Grid from "../components/Grid";
+import BuyMeACoffee from "../components/BuyMeACoffee";
 
 const Home: NextPage = () => {
   const [isGameOverModalOpen, setGameOverModalOpen] = useState<boolean>(false);
@@ -95,6 +96,7 @@ const Home: NextPage = () => {
       <Head>
         <title>CRIPTO | Clássico</title>
       </Head>
+      <BuyMeACoffee />
       <Grid 
         cards={cards}
         tries={tries}

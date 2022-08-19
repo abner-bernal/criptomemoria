@@ -25,6 +25,7 @@ import { LetterProps } from "../components/Letter";
 import { CardProps } from "../components/Card";
 import GameWord from "../components/GameWord";
 import Grid from "../components/Grid";
+import BuyMeACoffee from "../components/BuyMeACoffee";
 
 const FreneticMode: NextPage = () => {
   const [isGameOverModalOpen, setGameOverModalOpen] = useState<boolean>(false);
@@ -101,6 +102,7 @@ const FreneticMode: NextPage = () => {
       <Head>
         <title>CRIPTO | Frenético</title>
       </Head>
+      <BuyMeACoffee />
       <Grid 
         cards={cards}
         tries={tries}
