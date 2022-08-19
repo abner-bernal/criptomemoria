@@ -32,7 +32,7 @@ export const initialGameData = (word: string, day: number): GameDataProps => {
     cards,
     won: false,
     gameOver: false,
-    tries: [encryptedSolution, empty, empty, empty],
+    tries: [encryptedSolution, empty, empty],
   }
 
   return data;

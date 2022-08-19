@@ -31,7 +31,7 @@ const FreneticMode: NextPage = () => {
   const [isGameOverModalOpen, setGameOverModalOpen] = useState<boolean>(false);
   const [tries, setTries] = useState<LetterProps[][]>(() => {
     const empty = emptyWord(5);
-    return [empty, empty, empty, empty]
+    return [empty, empty, empty]
   });
   const [gameData, setGameData] = useState<GameDataProps>();
   const [level, setLevel] = useState<GameLevel>('easy');

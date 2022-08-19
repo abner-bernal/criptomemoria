@@ -49,9 +49,9 @@ function GameWord({
       
       gameData.curDay = dayNumber();
       gameData.won = hasWon;
-      gameData.gameOver = gameData.curRow === 3 || hasWon;
+      gameData.gameOver = gameData.curRow === 2 || hasWon;
       
-      if(gameData.curRow < 3 && !hasWon) {
+      if(gameData.curRow < 2 && !hasWon) {
         tries[gameData.curRow + 1] = gameData.encryptedSolution;
       }
       

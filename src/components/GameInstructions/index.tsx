@@ -174,7 +174,10 @@ const ClassicMode = () => {
   return(
     <PageContainer>
       <Title>Modo Clássico</Title>
-      <Text>Descriptografe a palavra encontrando as cartas com os símbolos correspondentes as letras criptografadas.</Text>
+      <TextContainer>
+        <Text>Descriptografe a palavra mistério em três tentativas.</Text>
+        <Text>Encontre as cartas com os símbolos correspondentes as letras criptografadas.</Text>
+      </TextContainer>
       <Word>
         <Piece char="s" status="decrypted" />
         <Piece char="o" status="decrypted" />
@@ -189,7 +192,7 @@ const ClassicMode = () => {
         <CardView id="4" letter="" symbol=""/>
       </CardsContainer>
       <TextContainer>
-        <Text>A carta pode conter o símbolo correspondente porém não ser a letra correta.</Text>
+        <Text>A carta pode conter o símbolo correspondente porém não conter a letra correta.</Text>
         <Text>Vire as cartas na sequência dos símbolos, caso contrário terá que recomeçar.</Text>
         <Text>Depois de cada tentativa de sequência, as peças mostram o quão perto você está da solução.</Text>
       </TextContainer>

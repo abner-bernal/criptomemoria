@@ -34,7 +34,7 @@ const ModalVariants = {
   },
 }
 
-function GameOverModal({ finalTry = 5, isOpen, setOpen }: GameOverModalProps) {
+function GameOverModal({ finalTry = 3, isOpen, setOpen }: GameOverModalProps) {
   const { pathname } = useRouter();
 
   const handleOutsideClick = (e: MouseEvent<HTMLDivElement>) => {
@@ -63,14 +63,10 @@ function GameOverModal({ finalTry = 5, isOpen, setOpen }: GameOverModalProps) {
       subtitle = 'Você é um gênio, venceu de primeira. Jogue outra modalidade.'
       break;
     case 1:
-      title = 'Impressionante!'
+      title = 'Parabéns!'
       subtitle = 'Você venceu o desafio do dia. Tente outra modalidade.'
       break;
     case 2:
-      title = 'Uau! Parabéns'
-      subtitle = 'Você venceu o desafio do dia. Tente outra modalidade.'
-      break;
-    case 3:
       title = 'Ufa! Na jogada final'
       subtitle = 'Você venceu o desafio do dia. Tente outra modalidade.'
       break;
@@ -92,8 +88,8 @@ function GameOverModal({ finalTry = 5, isOpen, setOpen }: GameOverModalProps) {
         variants={ModalVariants}
       >
         <CloseButton onClick={() => setOpen(false)} />
-        {finalTry < 4 && <MedalIcon />}
-        <Title>{title} {finalTry > 3 && <span role="img" aria-label="crying face">😢</span>}</Title>
+        {finalTry < 3 && <MedalIcon />}
+        <Title>{title} {finalTry > 2 && <span role="img" aria-label="crying face">😢</span>}</Title>
         <Subtitle>{subtitle}</Subtitle>
         <Link href={path} passHref >
           <NextGameModeButton>
