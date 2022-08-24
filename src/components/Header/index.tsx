@@ -90,7 +90,11 @@ export function Header({ setIsInstructionModalOpen }: HeaderProps) {
   return(
     <Container>
       <Content>
-        {(pathname !== '/about') && <Button onClick={handleOpenInstructions}>?</Button>}
+        {(pathname !== '/about') && 
+        <Button 
+          name="Instruções" 
+          onClick={handleOpenInstructions}
+        >?</Button>}
         <TitleContainer>
           <Title>Cripto-memória</Title>
           {subtitle && <Subtitle>{subtitle}</Subtitle>}
@@ -102,6 +106,7 @@ export function Header({ setIsInstructionModalOpen }: HeaderProps) {
         >
           <Button 
             onClick={handleButtonClick}
+            name="Mais conteúdo"
             style={focused ? focusButtonStyle : undefined}
           >
             <Ellipsis />

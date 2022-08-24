@@ -5,6 +5,10 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
+  i18n: {
+    locales: ["pt"],
+    defaultLocale: "pt",
+  },
 }
 
 module.exports = nextConfig
