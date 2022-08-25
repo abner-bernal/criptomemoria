@@ -96,7 +96,7 @@ const Home: NextPage = () => {
       <Head>
         <title>CRIPTO | Clássico</title>
       </Head>
-      <BuyMeACoffee />
+      {/* <BuyMeACoffee /> */}
       <Grid 
         cards={cards}
         tries={tries}

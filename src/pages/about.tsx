@@ -42,12 +42,12 @@ const About: NextPage = () => {
         .</Text1>
         <Text2>Uma ideia entre um turbilhão de ideias loucas da cabeça de um programador com muitos sonhos e poucas oportunidades.</Text2>
       </Content>
-      <DonateContainer>
+      {/* <DonateContainer>
         <DonateTitle>Apoie</DonateTitle>
         <ButtonContainer>
           <PayPalButton />
         </ButtonContainer>
-      </DonateContainer>
+      </DonateContainer> */}
     </>
   )
 }

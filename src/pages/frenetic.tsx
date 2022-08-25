@@ -102,7 +102,7 @@ const FreneticMode: NextPage = () => {
       <Head>
         <title>CRIPTO | Frenético</title>
       </Head>
-      <BuyMeACoffee />
+      {/* <BuyMeACoffee /> */}
       <Grid 
         cards={cards}
         tries={tries}
