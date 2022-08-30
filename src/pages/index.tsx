@@ -95,6 +95,11 @@ const Home: NextPage = () => {
     <>
       <Head>
         <title>CRIPTO | Clássico</title>
+        <script 
+          async 
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4905108546886726"
+          crossOrigin="anonymous"
+        ></script>
       </Head>
       {/* <BuyMeACoffee /> */}
       <Grid 

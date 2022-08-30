@@ -96,7 +96,9 @@ export function Header({ setIsInstructionModalOpen }: HeaderProps) {
           onClick={handleOpenInstructions}
         >?</Button>}
         <TitleContainer>
-          <Title>Cripto-memória</Title>
+          <Link href='/' passHref>
+            <Title>Cripto-memória</Title>
+          </Link>
           {subtitle && <Subtitle>{subtitle}</Subtitle>}
         </TitleContainer>
         <DropdownMenu

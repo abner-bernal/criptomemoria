@@ -58,7 +58,7 @@ export const TitleContainer = styled.div`
   }
 `;
 
-export const Title = styled.strong`
+export const Title = styled.a`
   font-weight: 400;
   text-transform: uppercase;
   font-size: 1.8rem;
