@@ -14,17 +14,7 @@ export default class MyDocument extends Document {
       ctx.renderPage = () =>
         originalRenderPage({
           enhanceApp: (App) => (props) =>
-            sheet.collectStyles(
-              <>
-                <App {...props} />
-                {/* <Script 
-                  charSet="UTF-8" 
-                  strategy='beforeInteractive'
-                  src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" 
-                /> */}
-                
-              </>
-            ),
+            sheet.collectStyles(<App {...props} />),
         })
 
       const initialProps = await Document.getInitialProps(ctx)
@@ -45,14 +35,39 @@ export default class MyDocument extends Document {
   render(): JSX.Element {
     return(
       <Html>
+        {/* <Script 
+          charSet="UTF-8" 
+          strategy='beforeInteractive'
+          src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" 
+        /> */}
         <Head>
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+
+          <meta name="title" content="CriptoMemória" />
+          <meta name="description" content="Descriptografe a palavra mistério em três tentativas. Jogue com a memória e desvende a palavra do dia."/>
+
+          {/* Open Graph / Facebook */}
+          <meta property="og:type" content="website"/>
+          <meta property="og:url" content="https://www.criptomemoria.com/"/>
+          <meta property="og:title" content="CriptoMemória"/>
+          <meta property="og:description" content="Descriptografe a palavra mistério em três tentativas. Jogue com a memória e desvende a palavra do dia."/>
+          <meta property="og:image" content="/linkLogo.png"/>
+
+          {/* Twitter */}
+          <meta property="twitter:card" content="summary_large_image"/>
+          <meta property="twitter:url" content="https://www.criptomemoria.com/"/>
+          <meta property="twitter:title" content="CriptoMemória"/>
+          <meta property="twitter:description" content="Descriptografe a palavra mistério em três tentativas. Jogue com a memória e desvende a palavra do dia."/>
+          <meta property="twitter:image" content="/linkLogo.png"/>
+
           <script 
             async 
             src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4905108546886726" 
             crossOrigin="anonymous"
           ></script>
-          <script dangerouslySetInnerHTML={{ __html: `(adsbygoogle = window.adsbygoogle || []).push({ google_ad_client: "ca-pub-4905108546886726", enable_page_level_ads: true });` }} />
         </Head>
+        
         <body>
           <Main />
           <NextScript />

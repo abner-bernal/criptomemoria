@@ -91,25 +91,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       />
       <Head>
         <title>CriptoMemória</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-
-        <meta name="title" content="CriptoMemória" />
-        <meta name="description" content="Descriptografe a palavra mistério em três tentativas. Jogue com a memória e desvende a palavra do dia."/>
-
-        {/* Open Graph / Facebook */}
-        <meta property="og:type" content="website"/>
-        <meta property="og:url" content="https://www.criptomemoria.com/"/>
-        <meta property="og:title" content="CriptoMemória"/>
-        <meta property="og:description" content="Descriptografe a palavra mistério em três tentativas. Jogue com a memória e desvende a palavra do dia."/>
-        <meta property="og:image" content="/linkLogo.png"/>
-
-        {/* Twitter */}
-        <meta property="twitter:card" content="summary_large_image"/>
-        <meta property="twitter:url" content="https://www.criptomemoria.com/"/>
-        <meta property="twitter:title" content="CriptoMemória"/>
-        <meta property="twitter:description" content="Descriptografe a palavra mistério em três tentativas. Jogue com a memória e desvende a palavra do dia."/>
-        <meta property="twitter:image" content="/linkLogo.png"/>
       </Head>
       <GlobalStyle />
       {loading && <LoadScreen />}
