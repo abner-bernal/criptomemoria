@@ -13,9 +13,11 @@ import GameInstructions from '../components/GameInstructions';
 import LoadScreen from '../components/LoadScreen';
 import { Header } from '../components/Header';
 import Script from 'next/script';
+import * as gtag from '../lib/gtag';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
+
   const [
     isInstructionModalOpen, 
     setIsInstructionModalOpen
@@ -30,22 +32,29 @@ function MyApp({ Component, pageProps }: AppProps) {
         changing.current && setLoading(true);
       }, 40)
     }
-    const handleRouteChangeComplete = () => {
+
+    const handleRouteChangeComplete = (url: string) => {
       changing.current = false;
+      gtag.pageview(url);
       setLoading(false);
+    }
+
+    const handleRouteChange = (url: string) => {
+      gtag.pageview(url)
     }
 
     router.events.on('routeChangeStart', handleRouteChangeStart)
     router.events.on('routeChangeComplete', handleRouteChangeComplete)
+    router.events.on('hashChangeComplete', handleRouteChange)
 
     // If the component is unmounted, unsubscribe
     // from the event with the `off` method:
     return () => {
       router.events.off('routeChangeStart', handleRouteChangeStart)
       router.events.off('routeChangeComplete', handleRouteChangeComplete)
+      router.events.off('hashChangeComplete', handleRouteChange)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [router.events])
 
   useEffect(() => {
     const main = document.getElementById('main');
@@ -62,6 +71,24 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <ThemeProvider theme={theme}>
+      <Script
+        strategy="afterInteractive"
+        src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`}
+      />
+      <Script
+        id="gtag-init"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${gtag.GA_TRACKING_ID}', {
+              page_path: window.location.pathname,
+            });
+          `,
+        }}
+      />
       <Head>
         <title>CriptoMemória</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
