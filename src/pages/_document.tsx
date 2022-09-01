@@ -70,9 +70,9 @@ export default class MyDocument extends Document {
           <Script
             async
             id="Adsense-id"
-            data-ad-client="ca-pub-4905108546886726"
+            crossOrigin="anonymous"
             strategy="beforeInteractive"
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" 
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4905108546886726" 
           />
         </Head>
         
