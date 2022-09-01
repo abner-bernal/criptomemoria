@@ -72,7 +72,7 @@ export default class MyDocument extends Document {
             id="Adsense-id"
             data-ad-client="ca-pub-4905108546886726"
             strategy="beforeInteractive"
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4905108546886726" 
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" 
           />
         </Head>
         
