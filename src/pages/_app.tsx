@@ -62,11 +62,6 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <ThemeProvider theme={theme}>
-      <Script
-        async 
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4905108546886726"
-        crossOrigin="anonymous"
-      />
       <Head>
         <title>CriptoMemória</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />

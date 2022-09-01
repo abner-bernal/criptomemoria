@@ -17,10 +17,16 @@ export default class MyDocument extends Document {
             sheet.collectStyles(
               <>
                 <App {...props} />
-                <Script 
+                {/* <Script 
                   charSet="UTF-8" 
                   strategy='beforeInteractive'
                   src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" 
+                /> */}
+                <Script
+                  async 
+                  crossOrigin="anonymous"
+                  strategy='beforeInteractive'
+                  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4905108546886726"
                 />
               </>
             ),
