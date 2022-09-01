@@ -35,11 +35,6 @@ export default class MyDocument extends Document {
   render(): JSX.Element {
     return(
       <Html>
-        {/* <Script 
-          charSet="UTF-8" 
-          strategy='beforeInteractive'
-          src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" 
-        /> */}
         <Head>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
@@ -63,12 +58,12 @@ export default class MyDocument extends Document {
 
 
           {/* google adsense */}
-          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" />
           <script 
             async 
             src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4905108546886726" 
             crossOrigin="anonymous"
           ></script>
+
           <script dangerouslySetInnerHTML={{
             __html: `
               (adsbygoogle = window.adsbygoogle || []).push({
@@ -77,14 +72,6 @@ export default class MyDocument extends Document {
               });
             `,
           }} />
-            
-         {/*  <Script
-            async
-            id="Adsense-id"
-            crossOrigin="anonymous"
-            strategy="beforeInteractive"
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4905108546886726" 
-          /> */}
         </Head>
         
         <body>
@@ -96,6 +83,12 @@ export default class MyDocument extends Document {
   }
 }
 
+/*  <Script 
+      charSet="UTF-8" 
+      strategy='beforeInteractive'
+      src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" 
+    /> */
+      
 /* <Script
         async 
         crossOrigin="anonymous"
