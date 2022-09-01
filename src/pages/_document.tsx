@@ -61,11 +61,19 @@ export default class MyDocument extends Document {
           <meta property="twitter:description" content="Descriptografe a palavra mistério em três tentativas. Jogue com a memória e desvende a palavra do dia."/>
           <meta property="twitter:image" content="/linkLogo.png"/>
 
-          <script 
+
+          {/* <script 
             async 
             src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4905108546886726" 
             crossOrigin="anonymous"
-          ></script>
+          ></script> */}
+          <Script
+            async
+            id="Adsense-id"
+            data-ad-client="ca-pub-4905108546886726"
+            strategy="beforeInteractive"
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4905108546886726" 
+          />
         </Head>
         
         <body>
