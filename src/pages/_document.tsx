@@ -63,15 +63,6 @@ export default class MyDocument extends Document {
             src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4905108546886726" 
             crossOrigin="anonymous"
           ></script>
-
-          {/* <script dangerouslySetInnerHTML={{
-            __html: `
-              (adsbygoogle = window.adsbygoogle || []).push({
-                google_ad_client: "5224230132",
-                enable_page_level_ads: true
-              });
-            `,
-          }} /> */}
         </Head>
         
         <body>

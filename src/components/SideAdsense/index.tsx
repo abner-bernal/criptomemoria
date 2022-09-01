@@ -6,14 +6,16 @@ declare global {
   }
 }
 
-export default function SideAdsense() {
+type SideAdsenseProps = {
+  currentPath: string;
+}
+
+export default function SideAdsense({ currentPath }: SideAdsenseProps) {
+
   const loadAds = () => {
     try {
       if (typeof window !== "undefined") {
-        (window.adsbygoogle = window.adsbygoogle || []).push({
-          google_ad_client: "5224230132",
-          enable_page_level_ads: true
-        });
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
       }
     } catch (error: any) {
       console.log("adsense error", error.message);
@@ -25,13 +27,15 @@ export default function SideAdsense() {
   }, []);
 
   return (
-    <ins
-      className="adsbygoogle"
-      style={{ display: "block" }}
-      data-ad-client="ca-pub-4905108546886726"
-      data-ad-slot="6152059660"
-      data-ad-format="auto"
-      data-full-width-responsive="true"
-    ></ins>
+    <div key={currentPath}>
+      <ins
+        className="adsbygoogle"
+        style={{ display: "block" }}
+        data-ad-client="ca-pub-4905108546886726"
+        data-ad-slot="6152059660"
+        data-ad-format="auto"
+        data-full-width-responsive="true"
+      ></ins>
+    </div>
   );
 }
