@@ -62,18 +62,29 @@ export default class MyDocument extends Document {
           <meta property="twitter:image" content="/linkLogo.png"/>
 
 
-          {/* <script 
+          {/* google adsense */}
+          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" />
+          <script 
             async 
             src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4905108546886726" 
             crossOrigin="anonymous"
-          ></script> */}
-          <Script
+          ></script>
+          <script dangerouslySetInnerHTML={{
+            __html: `
+              (adsbygoogle = window.adsbygoogle || []).push({
+                google_ad_client: "5224230132",
+                enable_page_level_ads: true
+              });
+            `,
+          }} />
+            
+         {/*  <Script
             async
             id="Adsense-id"
             crossOrigin="anonymous"
             strategy="beforeInteractive"
             src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4905108546886726" 
-          />
+          /> */}
         </Head>
         
         <body>

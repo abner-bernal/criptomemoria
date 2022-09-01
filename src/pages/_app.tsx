@@ -14,6 +14,7 @@ import LoadScreen from '../components/LoadScreen';
 import { Header } from '../components/Header';
 import Script from 'next/script';
 import * as gtag from '../lib/gtag';
+import SideAdsense from '../components/SideAdsense';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -96,15 +97,19 @@ function MyApp({ Component, pageProps }: AppProps) {
       {loading && <LoadScreen />}
 
       <Container>
-        <Main 
-          id='main' 
-          style={
-            pathname !== '/about' 
-              ? {flexDirection: 'column-reverse'} : undefined
-          }
-        >
-          <Component {...pageProps} />
-        </Main>
+        <div style={{display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-evenly'}}>
+          <SideAdsense />
+          <Main 
+            id='main' 
+            style={
+              pathname !== '/about' 
+                ? {flexDirection: 'column-reverse'} : undefined
+            }
+          >
+            <Component {...pageProps} />
+          </Main>
+          <SideAdsense />
+        </div>
         <Header setIsInstructionModalOpen={setIsInstructionModalOpen}/>
       </Container>
 
