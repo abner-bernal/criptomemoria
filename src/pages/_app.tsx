@@ -12,6 +12,7 @@ import { theme } from '../global/styles/theme'
 import GameInstructions from '../components/GameInstructions';
 import LoadScreen from '../components/LoadScreen';
 import { Header } from '../components/Header';
+import Script from 'next/script';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -61,6 +62,11 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <ThemeProvider theme={theme}>
+      <Script
+        async 
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4905108546886726"
+        crossOrigin="anonymous"
+      />
       <Head>
         <title>CriptoMemória</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
