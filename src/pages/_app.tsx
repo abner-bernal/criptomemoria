@@ -98,7 +98,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
       <Container>
         <div style={{display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-evenly'}}>
-          <SideAdsense currentPath='leftAd'/>
+          <SideAdsense />
           <Main 
             id='main' 
             style={
@@ -108,7 +108,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           >
             <Component {...pageProps} />
           </Main>
-          <SideAdsense currentPath='rightAd'/>
+          <SideAdsense />
         </div>
         <Header setIsInstructionModalOpen={setIsInstructionModalOpen}/>
       </Container>

@@ -6,11 +6,7 @@ declare global {
   }
 }
 
-type SideAdsenseProps = {
-  currentPath: string;
-}
-
-export default function SideAdsense({ currentPath }: SideAdsenseProps) {
+export default function SideAdsense() {
 
   const loadAds = () => {
     try {
@@ -27,15 +23,13 @@ export default function SideAdsense({ currentPath }: SideAdsenseProps) {
   }, []);
 
   return (
-    <div key={currentPath}>
-      <ins
-        className="adsbygoogle"
-        style={{ display: "block" }}
-        data-ad-client="ca-pub-4905108546886726"
-        data-ad-slot="6152059660"
-        data-ad-format="auto"
-        data-full-width-responsive="true"
-      ></ins>
-    </div>
+    <ins
+      className="adsbygoogle"
+      style={{ display: "block" }}
+      data-ad-client="ca-pub-4905108546886726"
+      data-ad-slot="6152059660"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
   );
 }
