@@ -71,15 +71,15 @@ export default class MyDocument extends Document {
             crossOrigin="anonymous"
           ></script> */}
 
+        </Head>
+        
+        <body>
           <Script
             async 
             crossOrigin="anonymous"
             strategy='beforeInteractive'
             src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4905108546886726"
           />
-        </Head>
-        
-        <body>
           <Main />
           <NextScript />
         </body>
